@@ -1,0 +1,10 @@
+version: "2"
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    ports:
+      - "8080:8080"
+    volumes:
+      - /home/prabhat/Documents/CodingHome/jenkins/prod:/var/jenkins_home
+  ssh-agent:
+    image: jenkins/ssh-agent
