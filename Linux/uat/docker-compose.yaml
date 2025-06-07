@@ -7,12 +7,8 @@ services:
       - "50000:50000"
     container_name: jenkins_uat
     volumes:
-      - jenkins_home:/var/jenkins_home
+      - /home/prabhat/Documents/CICDHome/Jenkins/uat_home:/var/jenkins_home
   ssh-agent_uat:
     image: jenkins/ssh-agent
 
-volumes:
-  jenkins_home:
-        type: bind
-        source: /home/prabhat/Documents/CICDHome/Jenkins/prod
 
