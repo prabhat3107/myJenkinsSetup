@@ -7,17 +7,9 @@ services:
     container_name: jenkins_controller_uat
     ports:
       - 8081:8080
-      - 50001:50000
+      - 50000:50000
     volumes:
       - /home/prabhat/Documents/CICDHome/Jenkins/uat_home:/var/jenkins_home
-    networks:
-      - jenkins_net_uat
-
-  jenkins_agent_uat:
-    image: jenkins/jnlp-agent-node
-    container_name: jenkins_agent_uat
-    user: root
-    volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - jenkins_net_uat
