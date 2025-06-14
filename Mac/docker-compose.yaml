@@ -1,12 +1,38 @@
-
-
-version: "2"
 services:
-  jenkins:
-    image: jenkins/jenkins:lts
-    ports:
-      - "8080:8080"
-    volumes:
-      - /Users/prabhat/Documents/CodingHome/jenkins/prod:/var/jenkins_home
-  ssh-agent:
-    image: jenkins/ssh-agent
+    docker:
+        command: '--storage-driver overlay2'
+        image: 'docker:dind'
+        ports:
+            - '2376:2376'
+        volumes:
+            - './jenkins-data:/var/jenkins_home'
+            - './jenkins-docker-certs:/certs/client'
+        environment:
+            - DOCKER_TLS_CERTDIR=/certs
+        networks:
+            jenkins:
+                aliases:
+                    - docker
+        privileged: true
+        container_name: jenkins-docker
+    myjenkins-blueocean:
+        build: .
+        volumes:
+            - './jenkins-docker-certs:/certs/client:ro'
+            - './jenkins-data:/var/jenkins_home'
+        ports:
+            - '50000:50000'
+            - '8080:8080'
+        environment:
+            - DOCKER_TLS_VERIFY=1
+            - DOCKER_CERT_PATH=/certs/client
+            - 'DOCKER_HOST=tcp://docker:2376'
+        networks:
+            jenkins: {}
+        restart: on-failure
+        container_name: jenkins-blueocean
+networks:
+    jenkins: {}
+
+
+

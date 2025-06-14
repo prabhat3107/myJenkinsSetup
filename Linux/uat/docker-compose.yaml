@@ -1,18 +1,22 @@
-version: "3.8"
 services:
-  jenkins_controller_uat:
+  docker_dind_uat:
     image: jenkins/jenkins:lts
     privileged: true
     user: root
     container_name: jenkins_controller_uat
+    environment:
+      - DOCKER_TLS_CERTDIR=/certs
     ports:
       - 8081:8080
       - 50000:50000
     volumes:
       - /home/prabhat/Documents/CICDHome/Jenkins/uat_home:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock
+      - /home/prabhat/Documents/CICDHome/Jenkins/uat_certs:/certs/client
     networks:
-      - jenkins_net_uat
+      jenkins_net_uat:
+        aliases:
+          - docker_uat
+
 networks:
   jenkins_net_uat:
     driver: bridge
