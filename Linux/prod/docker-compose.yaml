@@ -29,9 +29,7 @@ services:
             - 'DOCKER_HOST=tcp://docker:2376'
         networks:
             jenkins:
-                aliases:
-                    - jenkins.sriauronet.lan
-                    - jenkins
+
         restart: on-failure
         container_name: jenkins-blueocean
 networks:
