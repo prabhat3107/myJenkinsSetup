@@ -28,7 +28,10 @@ services:
             - DOCKER_CERT_PATH=/certs/client
             - 'DOCKER_HOST=tcp://docker:2376'
         networks:
-            jenkins: {}
+            jenkins:
+                aliases:
+                    - jenkins.sriauronet.lan
+                    - jenkins
         restart: on-failure
         container_name: jenkins-blueocean
 networks:
