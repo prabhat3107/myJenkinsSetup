@@ -47,16 +47,16 @@ fi
 #Create the necessary Directories
 
 if [ ! -d "$BASE_DIR" ]; then
-  install -o $USER -g `id -gn $USER`-d $BASE_DIR
-  install -o $USER -g `id -gn $USER`-d "$BASE_DIR/$DEPLOYMENT_ENV"
-  install -o $USER -g `id -gn $USER`-d $JENKINS_DATA_DIR
-  install -o $USER -g `id -gn $USER`-d $JENKINS_DOCKER_CERTS
+  install -o $USER -g `id -gn $USER` -d $BASE_DIR
+  install -o $USER -g `id -gn $USER` -d "$BASE_DIR/$DEPLOYMENT_ENV"
+  install -o $USER -g `id -gn $USER` -d $JENKINS_DATA_DIR
+  install -o $USER -g `id -gn $USER` -d $JENKINS_DOCKER_CERTS
 fi
 
 if [ ! -d "$BASE_DIR/$DEPLOYMENT_ENV" ]; then
-  install -o $USER -g `id -gn $USER`-d "$BASE_DIR/$DEPLOYMENT_ENV"
-  install -o $USER -g `id -gn $USER`-d $JENKINS_DATA_DIR
-  install -o $USER -g `id -gn $USER`-d $JENKINS_DOCKER_CERTS
+  install -o $USER -g `id -gn $USER` -d "$BASE_DIR/$DEPLOYMENT_ENV"
+  install -o $USER -g `id -gn $USER` -d $JENKINS_DATA_DIR
+  install -o $USER -g `id -gn $USER` -d $JENKINS_DOCKER_CERTS
 fi
 
 
