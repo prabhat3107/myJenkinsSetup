@@ -28,6 +28,7 @@ if [ $# != 1 ]; then
   exit 1
 fi
 DEPLOYMENT_ENV=$1
+GROUP=$(id -gn $USER)
 
 case "$DEPLOYMENT_ENV" in
  "dev"|"prod"|"uat")
@@ -53,23 +54,25 @@ fi
 
 #Create the necessary Directories
 if [ ! -d "$BASE_DIR" ]; then
-  install -o $USER -g `id -gn $USER` -d $JENKINS_DATA_DIR
-  install -o $USER -g `id -gn $USER` -d $JENKINS_DOCKER_CERTS
+  install -d $JENKINS_DATA_DIR
+  install -d $JENKINS_DOCKER_CERTS
 fi
 
 if [ ! -d "$BASE_DIR/$DEPLOYMENT_ENV" ]; then
-  install -o $USER -g `id -gn $USER` -d $JENKINS_DATA_DIR
-  install -o $USER -g `id -gn $USER` -d $JENKINS_DOCKER_CERTS
+  install -d $JENKINS_DATA_DIR
+  install -d $JENKINS_DOCKER_CERTS
 fi
 
-chown -R $USER:`id -gn $USER` $BASE_DIR
+
 
 sed -i "s#docker-compose-directory#$BASE_DIR/$DEPLOYMENT_ENV#" jenkins.service
 sed -i "s#jenkins-data#$JENKINS_DATA_DIR#" docker-compose.yaml
 sed -i "s#jenkins-docker-certs#$JENKINS_DOCKER_CERTS#" docker-compose.yaml
 
-install -o $USER -g `id -gn $USER` docker-compose.yaml $BASE_DIR/$DEPLOYMENT_ENV
-install -o $USER -g `id -gn $USER` Dockerfile $BASE_DIR/$DEPLOYMENT_ENV
+install -o $USER -g $GROUP docker-compose.yaml $BASE_DIR/$DEPLOYMENT_ENV
+install -o $USER -g $GROUP Dockerfile $BASE_DIR/$DEPLOYMENT_ENV
+
+chown -R $USER:$GROUP $BASE_DIR
 
 install -m 644 jenkins.service /etc/systemd/system
 
