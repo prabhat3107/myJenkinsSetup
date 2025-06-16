@@ -18,7 +18,7 @@ F_BOLD="\033[1m"
 C_RED="\033[38;5;9m"
 C_YELLOW="\033[48;5;11m"
 
-if [[ "$EID" -ne 0 ]]; then
+if [[ "$EUID" -ne 0 ]]; then
   echo -e "${F_BOLD}${C_RED}${C_YELLOW} Not running with sudo!! Exiting!!!${NO_FORMAT}"
   exit 1
 fi
