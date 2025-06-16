@@ -69,8 +69,8 @@ sed -i "s#docker-compose-directory#$BASE_DIR/$DEPLOYMENT_ENV#" jenkins.service
 sed -i "s#jenkins-data#$JENKINS_DATA_DIR#" docker-compose.yaml
 sed -i "s#jenkins-docker-certs#$JENKINS_DOCKER_CERTS#" docker-compose.yaml
 
-install -o $USER -g $GROUP docker-compose.yaml $BASE_DIR/$DEPLOYMENT_ENV
-install -o $USER -g $GROUP Dockerfile $BASE_DIR/$DEPLOYMENT_ENV
+install -m 644 -o $USER -g $GROUP docker-compose.yaml $BASE_DIR/$DEPLOYMENT_ENV
+install -m 644 -o $USER -g $GROUP Dockerfile $BASE_DIR/$DEPLOYMENT_ENV
 
 chown -R $USER:$GROUP $BASE_DIR
 
