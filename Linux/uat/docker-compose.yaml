@@ -19,4 +19,4 @@ services:
 
 networks:
   jenkins_net_uat:
-    driver: bridge
+    driver: bridgevav

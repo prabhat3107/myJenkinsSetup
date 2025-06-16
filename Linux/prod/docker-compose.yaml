@@ -5,8 +5,8 @@ services:
         ports:
             - '2376:2376'
         volumes:
-            - '/home/prabhat/Documents/CICDHome/Jenkins/prod/jenkins-data:/var/jenkins_home'
-            - '/home/prabhat/Documents/CICDHome/Jenkins/prod/jenkins-docker-certs:/certs/client'
+            - 'jenkins-data:/var/jenkins_home'
+            - 'jenkins-docker-certs:/certs/client'
         environment:
             - DOCKER_TLS_CERTDIR=/certs
         networks:
@@ -18,8 +18,8 @@ services:
     myjenkins-blueocean:
         build: .
         volumes:
-            - '/home/prabhat/Documents/CICDHome/Jenkins/prod/jenkins-docker-certs:/certs/client:ro'
-            - '/home/prabhat/Documents/CICDHome/Jenkins/prod/jenkins-data:/var/jenkins_home'
+            - 'jenkins-docker-certs:/certs/client:ro'
+            - 'jenkins-data:/var/jenkins_home'
         ports:
             - '50000:50000'
             - '8080:8080'
