@@ -66,6 +66,6 @@ if [ ! -d "$BASE_DIR/$DEPLOYMENT_ENV" ]; then
 fi
 
 
-sed -i "s/jenkins-data/$JENKINS_DATA_DIR" docker-compose.yaml
+sed "s/jenkins-data/$JENKINS_DATA_DIR" docker-compose.yaml
 
 
