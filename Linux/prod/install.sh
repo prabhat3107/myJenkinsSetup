@@ -13,6 +13,16 @@ function usage() {
     echo " <env> = prod or dev or uat ( in small case )"
 }
 
+NO_FORMAT="\033[0m"
+F_BOLD="\033[1m"
+C_RED="\033[38;5;9m"
+C_YELLOW="\033[48;5;11m"
+
+if [[ "$EID" -ne 0 ]]; then
+  echo -e "${F_BOLD}${C_RED}${C_YELLOW} Not running with sudo!! Exiting!!!${NO_FORMAT}"
+  exit 1
+fi
+
 if [ $# != 1 ]; then
   usage
   exit 1
@@ -34,10 +44,7 @@ JENKINS_DATA_DIR="$BASE_DIR/$DEPLOYMENT_ENV/jenkins-data"
 JENKINS_DOCKER_CERTS="$BASE_DIR/$DEPLOYMENT_ENV/jenkins-docker-certs"
 
 # Check if there is a previous installation
-NO_FORMAT="\033[0m"
-F_BOLD="\033[1m"
-C_RED="\033[38;5;9m"
-C_YELLOW="\033[48;5;11m"
+
 
 if [ -d "$JENKINS_DATA_DIR" ]; then
   echo -e "${F_BOLD}${C_RED}${C_YELLOW}There is existing installation!! Exiting!!!${NO_FORMAT}"
