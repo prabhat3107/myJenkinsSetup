@@ -65,7 +65,10 @@ if [ ! -d "$BASE_DIR/$DEPLOYMENT_ENV" ]; then
   install -o $USER -g `id -gn $USER` -d $JENKINS_DOCKER_CERTS
 fi
 
-
+sed -i "s#docker-compose-directory#$BASE_DIR/$DEPLOYMENT_ENV#" jenkins.service
 sed -i "s#jenkins-data#$JENKINS_DATA_DIR#" docker-compose.yaml
 sed -i "s#jenkins-docker-certs#$JENKINS_DOCKER_CERTS#" docker-compose.yaml
 
+install -m 644 jenkins.service /etc/systemd/system
+
+systemctl daemon-reload
