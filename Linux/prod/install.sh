@@ -52,7 +52,6 @@ if [ -d "$JENKINS_DATA_DIR" ]; then
 fi
 
 #Create the necessary Directories
-
 if [ ! -d "$BASE_DIR" ]; then
   install -o $USER -g `id -gn $USER` -d $BASE_DIR
   install -o $USER -g `id -gn $USER` -d "$BASE_DIR/$DEPLOYMENT_ENV"
@@ -66,5 +65,7 @@ if [ ! -d "$BASE_DIR/$DEPLOYMENT_ENV" ]; then
   install -o $USER -g `id -gn $USER` -d $JENKINS_DOCKER_CERTS
 fi
 
+
+sed -i "s/jenkins-data/$JENKINS_DATA_DIR" docker-compose.yaml
 
 
