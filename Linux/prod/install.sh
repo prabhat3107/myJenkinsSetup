@@ -72,7 +72,7 @@ sed -i "s#jenkins-docker-certs#$JENKINS_DOCKER_CERTS#" docker-compose.yaml
 install -m 644 -o $USER -g $GROUP docker-compose.yaml $BASE_DIR/$DEPLOYMENT_ENV
 install -m 644 -o $USER -g $GROUP Dockerfile $BASE_DIR/$DEPLOYMENT_ENV
 
-chown -R $USER:$GROUP $BASE_DIR
+chown -R prabhat.prabhat $BASE_DIR
 
 install -m 644 jenkins.service /etc/systemd/system
 
